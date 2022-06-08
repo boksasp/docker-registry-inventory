@@ -35,3 +35,26 @@ export function cleanCommand(dirtyCommand) {
     }
     return command;
 }
+
+export function addTruncatedCommands(commands) {
+    let truncateCommands = [];
+
+    for (let i = 0; i < commands.length; i++) {
+        const element = commands[i];
+        const elementParts = element.split(" ");
+
+        if (elementParts.length > 5) {
+            truncateCommands.push({
+                cmd: element,
+                truncated: elementParts.slice(0, 5).join(" ")
+            })
+        } else {
+            truncateCommands.push({
+                cmd: element,
+                truncated: element
+            })
+        }
+    }
+
+    return truncateCommands;
+}

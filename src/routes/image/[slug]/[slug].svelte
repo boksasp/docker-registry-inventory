@@ -2,6 +2,7 @@
     import { page } from "$app/stores";
     import { onDestroy, onMount } from "svelte";
     import ManifestViewer from "../../../components/ManifestViewer.svelte";
+import Spinner from "../../../components/Spinner.svelte";
 
     const registryHost = import.meta.env.VITE_REGISTRY_HOST;
     const registryPort = import.meta.env.VITE_REGISTRY_PORT;
@@ -37,18 +38,22 @@
     });
 </script>
 
-<p>{image}:{tag} details</p>
-{#if error}
-    <p class="error">
-        oh fuck:
-        {#each manifestResponse.errors as err}
-            {err.code}
-        {/each}
-    </p>
-{:else if manifestResponse !== undefined}
-    <code>arch: {manifestResponse.architecture}</code>
-    <ManifestViewer content={manifestJSON} />
-{/if}
+<main>
+    <h3>{image}:{tag}</h3>
+    {#if error}
+        <p class="error">
+            oh fuck:
+            {#each manifestResponse.errors as err}
+                {err.code}
+            {/each}
+        </p>
+    {/if}
+    {#if manifestResponse !== undefined}
+        <ManifestViewer content={manifestJSON} />
+    {:else}
+        <Spinner text="fetching manifest"/>
+    {/if}
+</main>
 
 <style>
     .error {

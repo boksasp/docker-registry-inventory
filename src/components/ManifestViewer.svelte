@@ -15,6 +15,6 @@
 </script>
 
 <div>
-    <JsonViewer {content} />
     <ManifestHistoryViewer history={histories} />
+    <JsonViewer {content} />
 </div>

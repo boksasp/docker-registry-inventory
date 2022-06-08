@@ -64,7 +64,7 @@ button:focus {
 
 main {
 	padding: 1em;
-	max-width: 240px;
+	
 	margin: 0 auto;
 }
 
@@ -86,4 +86,8 @@ h3 {
 	main {
 		max-width: none;
 	}
+}
+
+.no-top-margin {
+	margin-top: 0;
 }
